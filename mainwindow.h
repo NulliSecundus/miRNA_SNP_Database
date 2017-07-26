@@ -27,6 +27,14 @@ private slots:
 
     void on_resetButton_clicked();
 
+    void on_comboBox_2_currentIndexChanged(const QString &arg1);
+
+    void on_locationComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_mutTypeComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_exportResultsButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString searchParam;
@@ -35,12 +43,12 @@ private:
     QString query;
     QString fieldList;
     QStringList tables;
-    QString chromosomeSearch;
+    QString optionChar;
     QString comboBoxSelection;
-    bool geneOn;
-    bool miRNAON;
-    bool snpON;
+    QString snpLocation;
+    QString mutType;
     int rowResults;
+    int colWidth;
 };
 
 #endif // MAINWINDOW_H

@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>1185</width>
-    <height>706</height>
+    <height>710</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Unbiased miR SNP Search</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/qresource/icon_200x200.png</normaloff>:/qresource/icon_200x200.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QTableView" name="mainTable">
@@ -43,18 +47,18 @@
      <string>Unbiased miR SNP Search</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>1070</x>
-      <y>30</y>
+      <y>40</y>
       <width>101</width>
       <height>46</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="exportResultsButton">
        <property name="text">
         <string>Export Results</string>
        </property>
@@ -86,7 +90,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>12</x>
@@ -148,17 +152,93 @@
      </item>
     </layout>
    </widget>
-   <zorder>mainTable</zorder>
-   <zorder></zorder>
+   <widget class="QGroupBox" name="groupBox">
+    <property name="geometry">
+     <rect>
+      <x>610</x>
+      <y>30</y>
+      <width>341</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Optional Fields</string>
+    </property>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>321</width>
+       <height>22</height>
+      </rect>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>  SNP Location: </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="locationComboBox">
+        <item>
+         <property name="text">
+          <string>All</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>5UTR</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Gene</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>3UTR</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>  Mutation Type: </string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QComboBox" name="mutTypeComboBox">
+        <item>
+         <property name="text">
+          <string>All</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Syn</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Mis</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </widget>
    <zorder>layoutWidget</zorder>
-   <zorder>searchBar</zorder>
-   <zorder>comboBox</zorder>
-   <zorder>resetButton</zorder>
-   <zorder>label</zorder>
-   <zorder>resultsOutput</zorder>
+   <zorder>mainTable</zorder>
+   <zorder>layoutWidget</zorder>
    <zorder>label_2</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>comboBox_2</zorder>
+   <zorder>groupBox</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -181,6 +261,8 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
