@@ -8,6 +8,7 @@
 #include <QFile>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QSortFilterProxyModel>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -18,7 +19,10 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
     this->statusBar()->setSizeGripEnabled(false);
 
-    fieldList = "Gene,Chromosome,Sequence,SNP,miRNA,AlleleNum,Alleles,\"MAF_>0.05\",Location,Mutation_ProteinPos,Mutation_Type";
+    ui->mainTable->setAlternatingRowColors(true);
+    ui->mainTable->setSortingEnabled(true);
+
+    fieldList = "Gene,Chromosome,Sequence,SNP,miRNA,AlleleNum,Alleles,\"MAF_>0.05\",Location,Mutation_ProteinPos,\"Mutation_Allele-Residue\",Mutation_Type";
     comboBoxSelection = "Gene";
     optionChar = "%";
     mutType = "";
@@ -39,11 +43,16 @@ MainWindow::MainWindow(QWidget *parent) :
     model->setHeaderData(7, Qt::Horizontal, tr("MAF >0.05"));
     model->setHeaderData(8, Qt::Horizontal, tr("SNP Location"));
     model->setHeaderData(9, Qt::Horizontal, tr("Residue Number"));
-    model->setHeaderData(10, Qt::Horizontal, tr("Mutation Type"));
-    ui->mainTable->setModel(model);
+    model->setHeaderData(10, Qt::Horizontal, tr("Allele-Residue"));
+    model->setHeaderData(11, Qt::Horizontal, tr("Mutation Type"));
+
+    proxyModel = new QSortFilterProxyModel(this);
+    proxyModel->setDynamicSortFilter(true);
+    proxyModel->setSourceModel(model);
+    ui->mainTable->setModel(proxyModel);
     QRect rect = ui->mainTable->geometry();
     colWidth = ui->mainTable->columnWidth(0);
-    rect.setWidth(20 + ui->mainTable->verticalHeader()->width() + colWidth * 11);
+    rect.setWidth(20 + ui->mainTable->verticalHeader()->width() + colWidth * 12);
     ui->mainTable->setGeometry(rect);
     rowResults = model->rowCount();
     if(rowResults<=1000)
@@ -69,7 +78,10 @@ void MainWindow::on_searchButton_clicked()
     for(int i=0;i<4;i++)
         model->fetchMore();
 
-    ui->mainTable->setModel(model);
+    proxyModel = new QSortFilterProxyModel(this);
+    proxyModel->setDynamicSortFilter(true);
+    proxyModel->setSourceModel(model);
+    ui->mainTable->setModel(proxyModel);
     rowResults = model->rowCount();
     if(rowResults<=1000)
         ui->resultsOutput->setText(QString::number(rowResults));
@@ -100,7 +112,10 @@ void MainWindow::on_resetButton_clicked()
     for(int i=0;i<4;i++)
         model->fetchMore();
 
-    ui->mainTable->setModel(model);
+    proxyModel = new QSortFilterProxyModel(this);
+    proxyModel->setDynamicSortFilter(true);
+    proxyModel->setSourceModel(model);
+    ui->mainTable->setModel(proxyModel);
     for(int i = 0; i < model->columnCount(); i++){
         ui->mainTable->setColumnWidth(i,colWidth);
     }
