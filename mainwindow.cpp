@@ -18,13 +18,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowFlags(Qt::Window | Qt::MSWindowsFixedSizeDialogHint);
     this->statusBar()->setSizeGripEnabled(false);
-
+    ui->titleHeader->adjustSize();
     ui->mainTable->setAlternatingRowColors(true);
     ui->mainTable->setSortingEnabled(true);
 
     fieldList = "Gene,Chromosome,Sequence,SNP,miRNA,AlleleNum,Alleles,\"MAF_>0.05\",Location,Mutation_ProteinPos,\"Mutation_Allele-Residue\",Mutation_Type";
     comboBoxSelection = "Gene";
-    optionChar = "%";
+    optionChar = "";
     mutType = "";
     snpLocation = "";
 
