@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 #include <QSqlTableModel>
 #include <QTableView>
+#include <QSortFilterProxyModel>
 
 namespace Ui {
 class MainWindow;
@@ -40,6 +41,7 @@ private:
     QString searchParam;
     QSqlDatabase miRNA_SNP_Database;
     QSqlQueryModel *model;
+    QSortFilterProxyModel *proxyModel;
     QString query;
     QString fieldList;
     QStringList tables;
